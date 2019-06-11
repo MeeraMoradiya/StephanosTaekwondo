@@ -17,8 +17,8 @@ import static org.hibernate.cfg.Environment.*;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScans(value = { @ComponentScan("com.bushansirgur.dao"),
-      @ComponentScan("com.bushansirgur.service") })
+@ComponentScans(value = { @ComponentScan("ca.uwindsor.mac.dao"),
+      @ComponentScan("ca.uwindsor.mac.service") })
 public class AppConfig {
 
    @Autowired
@@ -48,7 +48,7 @@ public class AppConfig {
       props.put(C3P0_MAX_STATEMENTS, env.getProperty("hibernate.c3p0.max_statements"));
 
       factoryBean.setHibernateProperties(props);
-      factoryBean.setPackagesToScan("com.bushansirgur.model");
+      factoryBean.setPackagesToScan("ca.uwindsor.mac.model");
 
       return factoryBean;
    }

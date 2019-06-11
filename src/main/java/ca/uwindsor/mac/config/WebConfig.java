@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.bushansirgur.controller" })
+@ComponentScan(basePackages = { "ca.uwindsor.mac.controller" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
 }
