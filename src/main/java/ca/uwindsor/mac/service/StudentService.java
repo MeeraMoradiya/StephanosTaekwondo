@@ -10,7 +10,7 @@ public interface StudentService {
 	 long save(Student student);
 	 Student get(long id);
 	   List<Student> list();
-	   void update(long id, Student book);
+	   void update(long id, Student student);
 	   void delete(long id);
 
 }

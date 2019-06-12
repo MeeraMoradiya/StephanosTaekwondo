@@ -31,7 +31,7 @@ public class StudentController {
 	   @PostMapping("/saveStudent")
 	   public ResponseEntity<?> save(@RequestBody Student student) {
 	      long id = studentService.save(student);
-	      return ResponseEntity.ok().body("New Book has been saved with ID:" + id);
+	      return ResponseEntity.ok().body("New Student has been saved with ID:" + id);
 	   }
 
 	   /*---Get a student by id---*/
@@ -52,13 +52,13 @@ public class StudentController {
 	   @PutMapping("/student/{id}")
 	   public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Student student) {
 		   studentService.update(id, student);
-	      return ResponseEntity.ok().body("Book has been updated successfully.");
+	      return ResponseEntity.ok().body("Student has been updated successfully.");
 	   }
 
 	   /*---Delete a book by id---*/
 	   @DeleteMapping("/student/{id}")
 	   public ResponseEntity<?> delete(@PathVariable("id") long id) {
 		   studentService.delete(id);
-	      return ResponseEntity.ok().body("Book has been deleted successfully.");
+	      return ResponseEntity.ok().body("Student has been deleted successfully.");
 	   }
 }

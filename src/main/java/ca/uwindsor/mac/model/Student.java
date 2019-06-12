@@ -2,6 +2,7 @@ package ca.uwindsor.mac.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,18 +13,42 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="STUDENT_ID")
 	private long student_id;
+	
+	@Column(name="STUDENT_FNAME", nullable=false)
 	private String student_fname;
+	
+	@Column(name="STUDENT_LNAME", nullable=false)
 	private String student_lname;
+	
+	@Column(name="STUDENT_DOB")
 	private Date student_dob;
+	
+	@Column(name="STUDENT_JOINDATE")
 	private Date student_joinDate;
+	
+	@Column(name="STUDENT_PHONE")
 	private long student_phone;
+	
+	@Column(name="STUDENT_EMAIL")
 	private String student_email;
+	
+	@Column(name="STUDENT_ADDRESS")
 	private String student_address;
+	@Column(name="STUDENT_CITY")
 	private String student_city;
+	
+	@Column(name="STUDENT_STATE")
 	private String student_state;
+	
+	@Column(name="STUDENT_POSTAL_CODE")
 	private String student_postal_code;
+	
+	@Column(name="STUDENT_STATUS")
 	private String student_status;
+	
+	@Column(name="PARENT_ID")
 	private long patent_id;
 
 	public long getPatent_id() {
