@@ -22,6 +22,17 @@ public class Student {
 	@Column(name="STUDENT_LNAME", nullable=false)
 	private String student_lname;
 	
+	@Column(name="STUDENT_NICKNAME")
+	private String student_nickname;
+	
+	public String getStudent_nickname() {
+		return student_nickname;
+	}
+
+	public void setStudent_nickname(String student_nickname) {
+		this.student_nickname = student_nickname;
+	}
+
 	@Column(name="STUDENT_DOB")
 	private Date student_dob;
 	
@@ -48,16 +59,8 @@ public class Student {
 	@Column(name="STUDENT_STATUS")
 	private String student_status;
 	
-	@Column(name="PARENT_ID")
-	private long patent_id;
-
-	public long getPatent_id() {
-		return patent_id;
-	}
-
-	public void setPatent_id(long patent_id) {
-		this.patent_id = patent_id;
-	}
+	
+	
 
 	public void setStudent_id(long student_id) {
 		this.student_id = student_id;
@@ -163,15 +166,16 @@ public class Student {
 	public void setStudent_status(String student_status) {
 		this.student_status = student_status;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Student [student_id=" + student_id + ", student_fname=" + student_fname + ", student_lname="
-				+ student_lname + ", student_dob=" + student_dob + ", student_joinDate=" + student_joinDate
-				+ ", student_phone=" + student_phone + ", student_email=" + student_email + ", student_address="
-				+ student_address + ", student_city=" + student_city + ", student_state=" + student_state
-				+ ", student_postal_code=" + student_postal_code + ", student_status=" + student_status + ", patent_id="
-				+ patent_id + "]";
+				+ student_lname + ", student_nickname=" + student_nickname + ", student_dob=" + student_dob
+				+ ", student_joinDate=" + student_joinDate + ", student_phone=" + student_phone + ", student_email="
+				+ student_email + ", student_address=" + student_address + ", student_city=" + student_city
+				+ ", student_state=" + student_state + ", student_postal_code=" + student_postal_code
+				+ ", student_status=" + student_status + "]";
 	}
-
+	
+	
 }

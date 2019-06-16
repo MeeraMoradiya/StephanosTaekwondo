@@ -34,10 +34,10 @@ public class StudentDaoImpl implements StudentDao{
 	public   void update(long id, Student student) {
 		   Session session = sessionFactory.getCurrentSession();
 		      Student student2 = session.byId(Student.class).load(id);
-		     // student2.setTitle(student.getTitle());
-		     // student2.setAuthor(student.getAuthor());
+		  
 		      student2.setStudent_fname(student.getStudent_fname());
 		      student2.setStudent_lname(student.getStudent_fname());
+		      student2.setStudent_nickname(student.getStudent_nickname());
 		      student2.setStudent_dob(student.getStudent_dob());
 		      student2.setStudent_joinDate(student.getStudent_joinDate());
 		      student2.setStudent_phone(student.getStudent_phone());
@@ -47,7 +47,7 @@ public class StudentDaoImpl implements StudentDao{
 		      student2.setStudent_state(student.getStudent_state());
 		      student2.setStudent_postal_code(student.getStudent_postal_code());
 		      student2.setStudent_status(student.getStudent_status());
-		      student2.setPatent_id(student.getPatent_id());
+		    
 		      session.flush();
 	   }
 	@Override
