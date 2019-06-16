@@ -3,10 +3,14 @@ package ca.uwindsor.mac.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ca.uwindsor.mac.dao.Student_Parent_Dao;
 import ca.uwindsor.mac.model.Student_Parent;
 
+@Service
+@Transactional(readOnly = true)
 public class Student_Parent_ServiceImpl implements Student_Parent_Service {
 	
 	@Autowired

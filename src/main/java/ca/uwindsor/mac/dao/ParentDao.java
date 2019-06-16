@@ -6,14 +6,14 @@ import ca.uwindsor.mac.model.Parent;
 
 public interface ParentDao {
 	
-	 long save(Parent parent);
+	long save(Parent parent);
 
-	 Parent get(long id);
+	Parent get(long id);
 
-	   List<Parent> list();
+	List<Parent> list();
 
-	   void update(long id, Parent parent);
+	void update(long id, Parent parent);
 
-	   void delete(long id);
+	void delete(long id);
 
 }
