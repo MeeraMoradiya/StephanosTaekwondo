@@ -26,7 +26,7 @@ public class Class {
 	@Column(name="END_TIME")
 	private String endTime;
 	
-	@Column(name="LEVEL")
+	@Column(name="S_LEVEL")
 	private String level;
 
 	public long getClass_id() {
