@@ -45,7 +45,7 @@ public class ParentDaoImpl implements ParentDao {
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
+		
 		Parent parent= sessionFactory.getCurrentSession().byId(Parent.class).load(id);
 	      sessionFactory.getCurrentSession().delete(parent);
 	}
