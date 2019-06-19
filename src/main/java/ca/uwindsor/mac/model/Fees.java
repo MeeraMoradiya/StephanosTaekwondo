@@ -27,6 +27,9 @@ public class Fees {
 	
 	@OneToOne
 	private Student student;
+	
+	@OneToOne
+	private Membership membership;
 
 	public long getF_id() {
 		return f_id;
@@ -67,12 +70,23 @@ public class Fees {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	
+	
+
+	public Membership getMembership() {
+		return membership;
+	}
+
+	public void setMembership(Membership membership) {
+		this.membership = membership;
+	}
 
 	@Override
 	public String toString() {
 		return "Fees [f_id=" + f_id + ", f_term=" + f_term + ", f_amount=" + f_amount + ", f_date=" + f_date
-				+ ", student=" + student.toString() + "]";
+				+ ", student=" + student.toString() + ", membership=" + membership.toString() + "]";
 	}
+
 	
 	
 	

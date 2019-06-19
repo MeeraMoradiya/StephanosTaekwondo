@@ -18,11 +18,9 @@ public class Membership {
 	@Column(name="MEMBERSHIP_ID")
 	private long membership_id;
 	
-	@Column(name="START_DATE")
-	private Date m_startDate;
 	
-	@Column(name="END_DATE")
-	private Date m_endDate;
+	@Column(name="M_DURATION")
+	private String m_duration;
 	
 	@Column(name="COST")
 	private double m_cost;
@@ -38,20 +36,14 @@ public class Membership {
 		this.membership_id = membership_id;
 	}
 
-	public Date getM_startDate() {
-		return m_startDate;
+	
+
+	public String getM_duration() {
+		return m_duration;
 	}
 
-	public void setM_startDate(Date m_startDate) {
-		this.m_startDate = m_startDate;
-	}
-
-	public Date getM_endDate() {
-		return m_endDate;
-	}
-
-	public void setM_endDate(Date m_endDate) {
-		this.m_endDate = m_endDate;
+	public void setM_duration(String m_duration) {
+		this.m_duration = m_duration;
 	}
 
 	public double getM_cost() {
@@ -72,9 +64,10 @@ public class Membership {
 
 	@Override
 	public String toString() {
-		return "Membership [membership_id=" + membership_id + ", m_startDate=" + m_startDate + ", m_endDate="
-				+ m_endDate + ", m_cost=" + m_cost + ", student=" + student.toString() + "]";
+		return "Membership [membership_id=" + membership_id + ", m_duration=" + m_duration + ", m_cost=" + m_cost
+				+ ", student=" + student + "]";
 	}
+
 	
 	
 

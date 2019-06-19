@@ -39,8 +39,7 @@ public class MembershipDaoImpl implements MembershipDao{
 	public void update(long id, Membership mem) {
 		 Session session = sessionFactory.getCurrentSession();
 		 Membership mem2 = session.byId(Membership.class).load(id);
-		 mem2.setM_startDate(mem.getM_startDate());
-		 mem2.setM_endDate(mem.getM_endDate());
+		mem2.setM_duration(mem.getM_duration());
 		 mem2.setM_cost(mem.getM_cost());
 		 mem2.setStudent(mem.getStudent());
 	    
