@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Parent;
+import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
 
 @Repository
@@ -48,6 +49,19 @@ public class Student_Parent_DaoImpl implements Student_Parent_Dao{
 		// TODO Auto-generated method stub
 		Student_Parent sp= sessionFactory.getCurrentSession().byId(Student_Parent.class).load(id);
 	      sessionFactory.getCurrentSession().delete(sp);
+	}
+
+	@Override
+	public Student getStudentByParent(Parent p) {
+		Student_Parent s=sessionFactory.getCurrentSession().get(Student_Parent.class,p.getParent_id());
+		return s.getStudent();
+	}
+
+	@Override
+	public Parent getParentByStudent(Student s) {
+		System.out.println("DAO Student"+s);
+		Student_Parent sp=sessionFactory.getCurrentSession().get(Student_Parent.class,s.getStudent_id());
+		return sp.getParent();
 	}
 
 

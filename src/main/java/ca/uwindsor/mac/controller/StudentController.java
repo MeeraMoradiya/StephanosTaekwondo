@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.uwindsor.mac.model.NewStudent;
+import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
 import ca.uwindsor.mac.service.ParentService;
 import ca.uwindsor.mac.service.RankService;
+import ca.uwindsor.mac.service.RankStudentService;
 import ca.uwindsor.mac.service.StudentService;
 import ca.uwindsor.mac.service.Student_Parent_Service;
 
@@ -29,13 +32,21 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
 	private ParentService parentService;
+	@Autowired
 	private Student_Parent_Service spService;
+	@Autowired
 	private RankService rankService;
+	
+	@Autowired
+	private RankStudentService rsService;
+	
 	
 	
 	 /*---Add new student---*/
-	   @PostMapping("/saveStudent")
+	   @PostMapping("/saveNewStudent")
 	   public ResponseEntity<?> save(@RequestBody NewStudent newStudent) {
 	        
 		   studentService.save(newStudent.getStudent());
@@ -49,6 +60,26 @@ public class StudentController {
 	      return ResponseEntity.ok().body("New Student has been saved Successfully");
 	   }
 	   
+	   
+	   
+	   @GetMapping("/getAllStudents")
+	   public ResponseEntity<List<NewStudent>> listAll() {
+	      List<NewStudent> students = new ArrayList<NewStudent>();
+	      List<Student> st=studentService.list();
+	      NewStudent n;
+	      Rank r;
+	      System.out.println("Before loop");
+	      for(Student s:st) {
+	    	  n=new NewStudent();
+	    	  r=rsService.getRankByStudent(s);
+	    	  n.setStudent(s);
+	    	  n.setParent(spService.getParentByStudent(s));
+	    	  n.setRank(r);
+	    	  n.setRelation("Parent");
+	    	  students.add(n);
+	      }
+	      return ResponseEntity.ok().body(students);
+	   }
 	   
 
 	   /*---Get a student by id---*/

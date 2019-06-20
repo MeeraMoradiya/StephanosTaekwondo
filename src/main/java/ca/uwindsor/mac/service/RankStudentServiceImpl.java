@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.uwindsor.mac.dao.RankStudentDao;
 import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
+import ca.uwindsor.mac.model.Student;
 
 @Service
 @Transactional(readOnly = true)
@@ -41,6 +42,11 @@ public class RankStudentServiceImpl implements RankStudentService {
 	public void delete(long id) {
 		rsDao.delete(id);
 		
+	}
+
+	@Override
+	public Rank getRankByStudent(Student s) {
+		return rsDao.getRankByStudent(s);
 	}
 
 	

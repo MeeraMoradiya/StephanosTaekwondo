@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
+import ca.uwindsor.mac.model.Student;
+import ca.uwindsor.mac.model.Student_Parent;
 
 @Repository
 public class RankStudentDaoImpl implements RankStudentDao{
@@ -48,6 +50,12 @@ public class RankStudentDaoImpl implements RankStudentDao{
 	public void delete(long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Rank getRankByStudent(Student s) {
+		Rank_Student rs=sessionFactory.getCurrentSession().get(Rank_Student.class,s.getStudent_id());
+		return rs.getRank();
 	}
 
 }

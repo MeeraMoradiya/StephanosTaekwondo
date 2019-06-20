@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.uwindsor.mac.dao.Student_Parent_Dao;
+import ca.uwindsor.mac.model.Parent;
+import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
+import sun.util.logging.resources.logging;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,6 +48,20 @@ public class Student_Parent_ServiceImpl implements Student_Parent_Service {
 		// TODO Auto-generated method stub
 		sp_dao.delete(id);
 		
+	}
+
+	@Override
+	public Student getStudentByParent(Parent p) {
+		// TODO Auto-generated method stub
+		return sp_dao.getStudentByParent(p);
+	}
+
+	@Override
+	public Parent getParentByStudent(Student s) {
+		System.out.println("Service Student"+s);
+	   
+		// TODO Auto-generated method stub
+		return sp_dao.getParentByStudent(s);
 	}
 
 }

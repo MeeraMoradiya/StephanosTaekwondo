@@ -2,7 +2,9 @@ package ca.uwindsor.mac.dao;
 
 import java.util.List;
 
-import ca.uwindsor.mac.model.Rank_Student;;
+import ca.uwindsor.mac.model.Rank;
+import ca.uwindsor.mac.model.Rank_Student;
+import ca.uwindsor.mac.model.Student;;
 
 public interface RankStudentDao {
 	long save(Rank_Student rank);
@@ -14,4 +16,6 @@ public interface RankStudentDao {
 	void update(long id, Rank_Student rank);
 
 	void delete(long id);
+	
+	Rank getRankByStudent(Student s);
 }
