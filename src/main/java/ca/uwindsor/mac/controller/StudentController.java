@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.uwindsor.mac.model.NewStudent;
 import ca.uwindsor.mac.model.Rank;
+import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
 import ca.uwindsor.mac.service.ParentService;
@@ -57,6 +58,12 @@ public class StudentController {
 		   sp.setParent(newStudent.getParent());
 		   sp.setStudent(newStudent.getStudent());
 		   sp.setSp_relation(newStudent.getRelation());
+		   spService.save(sp);
+		   
+		   Rank_Student rs = new Rank_Student();
+		   rs.setRank(newStudent.getRank());
+		   rs.setStudent(newStudent.getStudent());
+		   rsService.save(rs);
 	      return ResponseEntity.ok().body("New Student has been saved Successfully");
 	   }
 	   
@@ -68,7 +75,7 @@ public class StudentController {
 	      List<Student> st=studentService.list();
 	      NewStudent n;
 	      Rank r;
-	      System.out.println("Before loop");
+	    
 	      for(Student s:st) {
 	    	  n=new NewStudent();
 	    	  r=rsService.getRankByStudent(s);

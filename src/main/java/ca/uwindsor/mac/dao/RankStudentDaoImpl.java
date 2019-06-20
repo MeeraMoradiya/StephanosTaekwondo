@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
-import ca.uwindsor.mac.model.Student_Parent;
 
 @Repository
 public class RankStudentDaoImpl implements RankStudentDao{
@@ -54,8 +53,10 @@ public class RankStudentDaoImpl implements RankStudentDao{
 
 	@Override
 	public Rank getRankByStudent(Student s) {
-		Rank_Student rs=sessionFactory.getCurrentSession().get(Rank_Student.class,s.getStudent_id());
-		return rs.getRank();
+		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from RANK_STUDENT WHERE STUDENT_STUDENT_ID="+s.getStudent_id()).list();
+	      return list.get(0).getRank();
 	}
+	
+	
 
 }
