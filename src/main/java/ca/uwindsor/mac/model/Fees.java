@@ -30,6 +30,7 @@ public class Fees {
 	
 	@OneToOne
 	private Membership membership;
+	
 
 	public long getF_id() {
 		return f_id;

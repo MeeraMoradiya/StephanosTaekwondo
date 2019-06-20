@@ -14,4 +14,6 @@ public interface FeesDao {
 	void update(long id, Fees fees);
 
 	void delete(long id);
+	
+	Fees getFeesByStudentId(long sid);
 }

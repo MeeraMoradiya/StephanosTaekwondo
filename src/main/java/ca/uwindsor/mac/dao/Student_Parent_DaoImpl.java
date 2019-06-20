@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Parent;
+import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
 
@@ -60,8 +61,9 @@ public class Student_Parent_DaoImpl implements Student_Parent_Dao{
 	@Override
 	public Parent getParentByStudent(Student s) {
 		System.out.println("DAO Student"+s);
-		Student_Parent sp=sessionFactory.getCurrentSession().get(Student_Parent.class,s.getStudent_id());
-		return sp.getParent();
+		List<Student_Parent> list = sessionFactory.getCurrentSession().createQuery("from STUDENT_PARENT WHERE STUDENT_STUDENT_ID="+s.getStudent_id()).list();
+	    //  return list.get(0).getRank();
+		return list.get(0).getParent();
 	}
 
 

@@ -14,4 +14,6 @@ public interface MembershipDao {
 	void update(long id, Membership mem);
 
 	void delete(long id);
+	
+	Membership getMembershipByStudent(long sid);
 }

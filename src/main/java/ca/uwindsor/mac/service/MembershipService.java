@@ -14,4 +14,6 @@ public interface MembershipService {
 	void update(long id, Membership mem);
 
 	void delete(long id);
+	
+    Membership getMembershipByStudentId(long sid);
 }

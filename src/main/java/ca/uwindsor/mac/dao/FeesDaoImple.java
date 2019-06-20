@@ -52,4 +52,10 @@ public class FeesDaoImple implements FeesDao{
 		
 	}
 
+	@Override
+	public Fees getFeesByStudentId(long sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

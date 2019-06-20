@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Class_Registration;
 import ca.uwindsor.mac.model.Membership;
+import ca.uwindsor.mac.model.Rank_Student;
 
 @Repository
 public class MembershipDaoImpl implements MembershipDao{
@@ -51,6 +52,12 @@ public class MembershipDaoImpl implements MembershipDao{
 		Membership mem= sessionFactory.getCurrentSession().byId(Membership.class).load(id);
 	      sessionFactory.getCurrentSession().delete(mem);
 		
+	}
+
+	@Override
+	public Membership getMembershipByStudent(long sid) {
+		List<Membership> list = sessionFactory.getCurrentSession().createQuery("from MEMBERSHIP WHERE STUDENT_STUDENT_ID="+sid).list();
+	      return list.get(0);
 	}
 
 }
