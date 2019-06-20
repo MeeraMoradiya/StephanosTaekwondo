@@ -24,15 +24,7 @@ public class Student {
 	
 	@Column(name="STUDENT_NICKNAME")
 	private String student_nickname;
-	
-	public String getStudent_nickname() {
-		return student_nickname;
-	}
-
-	public void setStudent_nickname(String student_nickname) {
-		this.student_nickname = student_nickname;
-	}
-
+		
 	@Column(name="STUDENT_DOB")
 	private Date student_dob;
 	
@@ -59,7 +51,8 @@ public class Student {
 	@Column(name="STUDENT_STATUS")
 	private String student_status;
 	
-	
+	@Column(name="STUDENT_RANK")
+	private String student_rank;
 	
 
 	public void setStudent_id(long student_id) {
@@ -167,6 +160,22 @@ public class Student {
 		this.student_status = student_status;
 	}
 
+	
+	public String getStudent_rank() {
+		return student_rank;
+	}
+
+	public void setStudent_rank(String student_rank) {
+		this.student_rank = student_rank;
+	}
+
+	public String getStudent_nickname() {
+		return student_nickname;
+	}
+
+	public void setStudent_nickname(String student_nickname) {
+		this.student_nickname = student_nickname;
+	}
 	@Override
 	public String toString() {
 		return "Student [student_id=" + student_id + ", student_fname=" + student_fname + ", student_lname="
@@ -174,8 +183,10 @@ public class Student {
 				+ ", student_joinDate=" + student_joinDate + ", student_phone=" + student_phone + ", student_email="
 				+ student_email + ", student_address=" + student_address + ", student_city=" + student_city
 				+ ", student_state=" + student_state + ", student_postal_code=" + student_postal_code
-				+ ", student_status=" + student_status + "]";
+				+ ", student_status=" + student_status + ", student_rank=" + student_rank + "]";
 	}
+
+	
 	
 	
 }

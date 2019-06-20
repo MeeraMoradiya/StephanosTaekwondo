@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import ca.uwindsor.mac.model.NewStudent;
 import ca.uwindsor.mac.model.Student;
+import ca.uwindsor.mac.model.Student_Parent;
+import ca.uwindsor.mac.service.ParentService;
+import ca.uwindsor.mac.service.RankService;
 import ca.uwindsor.mac.service.StudentService;
+import ca.uwindsor.mac.service.Student_Parent_Service;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,18 +29,32 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	private ParentService parentService;
+	private Student_Parent_Service spService;
+	private RankService rankService;
 	
 	
 	 /*---Add new student---*/
 	   @PostMapping("/saveStudent")
-	   public ResponseEntity<?> save(@RequestBody Student student) {
-	      long id = studentService.save(student);
-	      return ResponseEntity.ok().body("New Student has been saved with ID:" + id);
+	   public ResponseEntity<?> save(@RequestBody NewStudent newStudent) {
+	        
+		   studentService.save(newStudent.getStudent());
+		   parentService.save(newStudent.getParent());
+		   rankService.save(newStudent.getRank());
+		   
+		   Student_Parent sp=new Student_Parent();
+		   sp.setParent(newStudent.getParent());
+		   sp.setStudent(newStudent.getStudent());
+		   sp.setSp_relation(newStudent.getRelation());
+	      return ResponseEntity.ok().body("New Student has been saved Successfully");
 	   }
+	   
+	   
 
 	   /*---Get a student by id---*/
 	   @GetMapping("/student/{id}")
 	   public ResponseEntity<Student> get(@PathVariable("id") long id) {
+		   
 	      Student student = studentService.get(id);
 	      return ResponseEntity.ok().body(student);
 	   }
