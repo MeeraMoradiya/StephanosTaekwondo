@@ -269,10 +269,10 @@ public class StudentController {
 	 */
 
 	/*---get all books---*/
-	@GetMapping("/student")
-	public ResponseEntity<List<Student>> list() {
-		List<Student> students = studentService.list();
-		return ResponseEntity.ok().body(students);
+	@GetMapping("/totalStudent")
+	public ResponseEntity<Integer> list() {
+		int size = studentService.list().size();
+		return ResponseEntity.ok().body(size);
 	}
 
 	/*---Update a book by id---*/

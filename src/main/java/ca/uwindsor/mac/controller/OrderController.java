@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.uwindsor.mac.model.Fees;
 import ca.uwindsor.mac.model.Inventory;
 import ca.uwindsor.mac.model.Order;
+import ca.uwindsor.mac.service.FeesService;
 import ca.uwindsor.mac.service.InventoryService;
 import ca.uwindsor.mac.service.OrderService;
 import ca.uwindsor.mac.service.StudentService;
@@ -38,6 +40,9 @@ public class OrderController {
 	@Autowired
 	private StudentService studentService;
 	
+	@Autowired
+	private FeesService feesService;
+	
 	 @PostMapping("/saveOrder")
 	   public ResponseEntity<?> save(@RequestBody Order order) {
 	      
@@ -53,6 +58,23 @@ public class OrderController {
 	      
 		 	return ResponseEntity.ok().body("New Order has been saved with ID:" + id);	      
 	   }
+	 
+	 @GetMapping("/totalProfit")
+	   public ResponseEntity<Double> getTotalProfit() {
+		 Double profit=new Double(0.0);
+	    List<Order> lstOrder=orderService.list();
+	    for(Order o:lstOrder) {
+	    	profit=profit+(o.getQty()*(o.getInv().getSelling_price()-o.getInv().getCost_price()));
+	    }
+	    List<Fees> fees=feesService.list();
+	    for(Fees f:fees)
+	    {
+	    	profit=profit+f.getF_amount();
+	    }
+	    return ResponseEntity.ok().body(profit);
+	   }
+	 
+	 
 
 	   /*---Get a student by id---*/
 	   @GetMapping("/Order/{id}")
