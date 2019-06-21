@@ -43,4 +43,9 @@ public class ClassRegistrationServiceImpl implements ClassRegistrationService {
 		
 	}
 
+	@Override
+	public ca.uwindsor.mac.model.Class getClassByStudentId(long sid) {
+		return clsDao.getClassByStudentId(sid);
+	}
+
 }

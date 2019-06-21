@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ca.uwindsor.mac.model.Rank;
@@ -18,4 +19,6 @@ public interface RankStudentDao {
 	void delete(long id);
 	
 	Rank getRankByStudent(Student s);
+	
+	Date getRankDateByStudentId(long id);
 }

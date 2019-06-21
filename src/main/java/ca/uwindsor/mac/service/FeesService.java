@@ -15,4 +15,6 @@ public interface FeesService {
 
 	
 	void delete(long id);
+	
+	Fees getFeesByStudentId(long sid);
 }

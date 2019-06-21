@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -55,6 +56,12 @@ public class RankStudentDaoImpl implements RankStudentDao{
 	public Rank getRankByStudent(Student s) {
 		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from RANK_STUDENT WHERE STUDENT_STUDENT_ID="+s.getStudent_id()).list();
 	      return list.get(0).getRank();
+	}
+
+	@Override
+	public Date getRankDateByStudentId(long id) {
+		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from RANK_STUDENT WHERE STUDENT_STUDENT_ID="+id).list();
+	      return list.get(0).getRank_date();
 	}
 	
 	

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.uwindsor.mac.model.Attendance;
+import ca.uwindsor.mac.model.Class;
 import ca.uwindsor.mac.model.Membership;
 import ca.uwindsor.mac.model.NewStudent;
 import ca.uwindsor.mac.model.Rank;
@@ -22,6 +24,10 @@ import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
 import ca.uwindsor.mac.model.ViewStudentModel;
+import ca.uwindsor.mac.service.AttandenceService;
+import ca.uwindsor.mac.service.ClassRegistrationService;
+import ca.uwindsor.mac.service.ClassService;
+import ca.uwindsor.mac.service.FeesService;
 import ca.uwindsor.mac.service.MembershipService;
 import ca.uwindsor.mac.service.ParentService;
 import ca.uwindsor.mac.service.RankService;
@@ -49,6 +55,17 @@ public class StudentController {
 	
 	@Autowired
 	private MembershipService memService;
+	
+	@Autowired
+	private AttandenceService atService;
+	
+	@Autowired
+	private FeesService feesService;
+	
+	@Autowired
+	private ClassRegistrationService clsService;
+	
+	
 
 	/*---Add new student---*/
 	@PostMapping("/saveNewStudent")
@@ -94,10 +111,16 @@ public class StudentController {
 	public ResponseEntity<ViewStudentModel> get(@PathVariable("id") long id) {
 		ViewStudentModel vw = new ViewStudentModel();
 		Student student = studentService.get(id);
+		Rank r = rsService.getRankByStudent(student);
+		
 		vw.setParent(spService.getParentByStudent(student));
 		vw.setStudent(student);
-		vw.setMem(memService.getMembershipByStudentId(student.getStudent_id()));
-
+		vw.setMem(memService.getMembershipByStudentId(id));
+		vw.setRank(r);
+		vw.setFees(feesService.getFeesByStudentId(id));
+		vw.setAttend(atService.getAttendanceByStudent(id));
+		vw.setRankDate(rsService.getRankDateByStudentId(id));
+		vw.setCls(clsService.getClassByStudentId(id));
 		return ResponseEntity.ok().body(vw);
 	}
 

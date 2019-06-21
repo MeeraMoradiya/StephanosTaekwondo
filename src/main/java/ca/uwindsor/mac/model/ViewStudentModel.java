@@ -1,5 +1,7 @@
 package ca.uwindsor.mac.model;
 
+import java.util.Date;
+
 public class ViewStudentModel {
 	
 	private Student student;
@@ -9,8 +11,13 @@ public class ViewStudentModel {
 	private Student_Parent sp;
 	private Rank rank;
 	private Rank_Student rs;
-	private Attendance att;
-	public Student getStudent() {
+	private Class cls;
+	private int attend;
+	private Date rankDate;
+	
+	
+	
+	Student getStudent() {
 		return student;
 	}
 	public void setStudent(Student student) {
@@ -52,17 +59,34 @@ public class ViewStudentModel {
 	public void setRs(Rank_Student rs) {
 		this.rs = rs;
 	}
-	public Attendance getAtt() {
-		return att;
+	public Class getCls() {
+		return cls;
 	}
-	public void setAtt(Attendance att) {
-		this.att = att;
+	public void setCls(Class cls) {
+		this.cls = cls;
+	}
+	public int getAttend() {
+		return attend;
+	}
+	public void setAttend(int attend) {
+		this.attend = attend;
+	}
+	
+	
+	public Date getRankDate() {
+		return rankDate;
+	}
+	public void setRankDate(Date rankDate) {
+		this.rankDate = rankDate;
 	}
 	@Override
 	public String toString() {
 		return "ViewStudentModel [student=" + student + ", mem=" + mem + ", fees=" + fees + ", parent=" + parent
-				+ ", sp=" + sp + ", rank=" + rank + ", rs=" + rs + ", att=" + att + "]";
+				+ ", sp=" + sp + ", rank=" + rank + ", rs=" + rs + ", cls=" + cls + ", attend=" + attend + ", rankDate="
+				+ rankDate + "]";
 	}
+	
+	
 	
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Class;
 import ca.uwindsor.mac.model.Fees;
+import ca.uwindsor.mac.model.Membership;
 
 @Repository
 public class FeesDaoImple implements FeesDao{
@@ -54,8 +55,8 @@ public class FeesDaoImple implements FeesDao{
 
 	@Override
 	public Fees getFeesByStudentId(long sid) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Fees> list = sessionFactory.getCurrentSession().createQuery("from FEES WHERE STUDENT_STUDENT_ID="+sid).list();
+	      return list.get(0);
 	}
 
 }

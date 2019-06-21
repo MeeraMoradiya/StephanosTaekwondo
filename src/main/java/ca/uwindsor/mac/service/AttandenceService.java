@@ -14,4 +14,6 @@ public interface AttandenceService {
 	void update(long id, Attendance at);
 
 	void delete(long id);
+	
+	int getAttendanceByStudent(long sid);
 }

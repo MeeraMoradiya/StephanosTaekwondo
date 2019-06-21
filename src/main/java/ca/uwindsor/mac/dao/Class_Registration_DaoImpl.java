@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 import ca.uwindsor.mac.model.Class_Registration;
+import ca.uwindsor.mac.model.Student_Parent;
 
 @Repository
 public class Class_Registration_DaoImpl implements ClassRegistrationDao{
@@ -48,6 +49,13 @@ public class Class_Registration_DaoImpl implements ClassRegistrationDao{
 		Class_Registration cls= sessionFactory.getCurrentSession().byId(Class_Registration.class).load(id);
 	      sessionFactory.getCurrentSession().delete(cls);
 		
+	}
+
+	@Override
+	public ca.uwindsor.mac.model.Class getClassByStudentId(long sid) {
+		List<ca.uwindsor.mac.model.Class_Registration> list = sessionFactory.getCurrentSession().createQuery("from CLASS_REGISTRATION WHERE STUDENT_STUDENT_ID="+sid).list();
+	    //  return list.get(0).getRank();
+		return list.get(0).getCls();
 	}
 
 }

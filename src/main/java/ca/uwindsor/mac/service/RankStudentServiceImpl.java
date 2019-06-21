@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,11 @@ public class RankStudentServiceImpl implements RankStudentService {
 	@Override
 	public Rank getRankByStudent(Student s) {
 		return rsDao.getRankByStudent(s);
+	}
+
+	@Override
+	public Date getRankDateByStudentId(long sid) {
+		return rsDao.getRankDateByStudentId(sid);
 	}
 
 	

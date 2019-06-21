@@ -2,6 +2,7 @@ package ca.uwindsor.mac.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import ca.uwindsor.mac.model.Membership;
 @Transactional(readOnly = true)
 public class MembershipServiceImpl implements MembershipService{
 
+	@Autowired
 	private MembershipDao memDao;
 	@Override
 	public long save(Membership mem) {

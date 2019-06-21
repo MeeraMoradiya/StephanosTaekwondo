@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ca.uwindsor.mac.model.Rank;
@@ -14,5 +15,6 @@ public interface RankStudentService {
 	   void update(long id, Rank_Student rs);
 	   void delete(long id);
        Rank getRankByStudent(Student s);
+       Date getRankDateByStudentId(long sid); 
        
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Attendance;
 import ca.uwindsor.mac.model.Class;
+import ca.uwindsor.mac.model.Rank_Student;
 
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
@@ -49,6 +50,12 @@ public class AttendanceDaoImpl implements AttendanceDao {
 		Attendance at= sessionFactory.getCurrentSession().byId(Attendance.class).load(id);
 	      sessionFactory.getCurrentSession().delete(at);
 		
+	}
+
+	@Override
+	public int getAttandanceCountByStudent(long sid) {
+		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from ATTANDENCE WHERE STUDENT_STUDENT_ID="+sid).list();
+	      return list.size();
 	}
 
 }

@@ -56,8 +56,11 @@ public class MembershipDaoImpl implements MembershipDao{
 
 	@Override
 	public Membership getMembershipByStudent(long sid) {
+		System.out.println("MembershipDao "+sid);
 		List<Membership> list = sessionFactory.getCurrentSession().createQuery("from MEMBERSHIP WHERE STUDENT_STUDENT_ID="+sid).list();
-	      return list.get(0);
+	    
+		System.out.println(list.get(0));
+		return list.get(0);
 	}
 
 }

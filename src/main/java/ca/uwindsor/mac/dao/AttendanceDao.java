@@ -14,4 +14,6 @@ public interface AttendanceDao {
 	void update(long id, Attendance at);
 
 	void delete(long id);
+	
+	int getAttandanceCountByStudent(long sid);
 }

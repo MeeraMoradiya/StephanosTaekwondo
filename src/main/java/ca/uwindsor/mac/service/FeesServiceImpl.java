@@ -2,6 +2,7 @@ package ca.uwindsor.mac.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import ca.uwindsor.mac.model.Fees;
 @Transactional(readOnly = true)
 public class FeesServiceImpl implements FeesService {
 
+	@Autowired
 	private FeesDao fDao;
 	
 	@Override
@@ -37,6 +39,11 @@ public class FeesServiceImpl implements FeesService {
 	public void delete(long id) {
 		fDao.delete(id);
 		
+	}
+
+	@Override
+	public Fees getFeesByStudentId(long sid) {
+		return fDao.getFeesByStudentId(sid);
 	}
 
 }

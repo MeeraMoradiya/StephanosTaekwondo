@@ -2,6 +2,7 @@ package ca.uwindsor.mac.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import ca.uwindsor.mac.model.Attendance;
 @Transactional(readOnly = true)
 public class AttendanceSeviceImpl implements AttandenceService{
 
+	@Autowired
 	private AttendanceDao atDao;
 	
 	@Override
@@ -38,6 +40,11 @@ public class AttendanceSeviceImpl implements AttandenceService{
 	public void delete(long id) {
 		atDao.delete(id);
 		
+	}
+
+	@Override
+	public int getAttendanceByStudent(long sid) {
+		return atDao.getAttandanceCountByStudent(sid);
 	}
 
 }

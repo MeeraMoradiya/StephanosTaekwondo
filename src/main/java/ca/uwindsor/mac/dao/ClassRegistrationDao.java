@@ -14,4 +14,6 @@ public interface ClassRegistrationDao {
 	void update(long id, Class_Registration cls);
 
 	void delete(long id);
+	
+	ca.uwindsor.mac.model.Class getClassByStudentId(long sid);
 }
