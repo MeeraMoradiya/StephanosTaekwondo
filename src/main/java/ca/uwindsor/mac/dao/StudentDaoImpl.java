@@ -73,7 +73,7 @@ public class StudentDaoImpl implements StudentDao{
 	    
 	     System.out.println("End Date is: "+toDate);  
 		 
-		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_JOINDATE >= TO_DATE("+fromDate+", 'YYYY-MM-DD') AND STUDENT_JOINDATE <= "+toDate).list();
+		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_JOINDATE >= TO_DATE('"+fromDate+"', 'YYYY-MM-DD') AND STUDENT_JOINDATE <= TO_DATE('"+toDate+"', 'YYYY-MM-DD')").list();
 		for(Student st : list) {
 			lst.add(st.getStudent_id());
 		}
