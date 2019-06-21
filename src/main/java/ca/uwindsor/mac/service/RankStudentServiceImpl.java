@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,18 @@ public class RankStudentServiceImpl implements RankStudentService {
 	@Override
 	public Date getRankDateByStudentId(long sid) {
 		return rsDao.getRankDateByStudentId(sid);
+	}
+
+	@Override
+	public ArrayList<Long> getStudentIdByRankId(Long rank) {
+		// TODO Auto-generated method stub
+		return rsDao.getStudentIdByRankId(rank);
+	}
+
+	@Override
+	public Long getRelationBySidAndRid(Long sid, Long rid) {
+		// TODO Auto-generated method stub
+		return rsDao.getRelationBySidAndRid(sid,rid);
 	}
 
 	

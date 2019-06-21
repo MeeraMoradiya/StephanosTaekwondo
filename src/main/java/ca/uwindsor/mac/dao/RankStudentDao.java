@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface RankStudentDao {
 	Rank getRankByStudent(Student s);
 	
 	Date getRankDateByStudentId(long id);
+	
+	public ArrayList<Long> getStudentIdByRankId(Long rank);
+	
+	public Long getRelationBySidAndRid(Long sid, Long rid);
 }

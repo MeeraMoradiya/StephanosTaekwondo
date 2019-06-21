@@ -188,7 +188,12 @@ public class StudentController {
 		ArrayList<Long> listDOJ =new ArrayList<Long>();
 		ArrayList<Long> listStatus =new ArrayList<Long>();
 		ArrayList<Long> listCity =new ArrayList<Long>();
+		ArrayList<Long> listRank=new ArrayList<Long>();
 		List<Long> listIds=new ArrayList<Long>();
+		List<Student> lstStd=studentService.list();
+		for(Student s: lstStd) {
+			listIds.add(s.getStudent_id());
+		}
 		
 		
 		if(input.getReportFrom() != null && input.getReportTo() !=null) {
@@ -203,11 +208,32 @@ public class StudentController {
 			listCity=studentService.getStudentListByCity(input.getCity());
 		}
 		
-		listIds=listDOJ.stream()
-	    .filter(listStatus::contains)
-	    .collect(Collectors
-	    .toList());
-		for(long l:listIds) {
+		if(input.getBelt() !=null && input.getBelt() != 0) {
+			listRank=rsService.getStudentIdByRankId(input.getBelt());
+		}
+		
+		 Set<Long> setIds=(Set<Long>)listIds.stream().collect(Collectors.toSet());
+		 Set<Long> setDOJ=(Set<Long>)listDOJ.stream().collect(Collectors.toSet());
+		 Set<Long> setStatus=(Set<Long>)listStatus.stream().collect(Collectors.toSet());
+		 Set<Long> setCity=(Set<Long>)listCity.stream().collect(Collectors.toSet());
+		 Set<Long> setBelt=(Set<Long>)listRank.stream().collect(Collectors.toSet());
+		 if(!setDOJ.isEmpty()) {
+			 setIds.retainAll(setDOJ);
+		 }
+		 if(!setStatus.isEmpty()) {
+			 setIds.retainAll(setStatus);
+		 }
+		 
+		 if(!setCity.isEmpty()) {
+			 setIds.retainAll(setCity);
+		 }
+		 
+		 if(!setBelt.isEmpty()) {
+			 setIds.retainAll(setBelt);
+		 }
+		
+		 
+		for(Long l:setIds) {
 			ResponseEntity<ViewStudentModel> v=	get(l);
 			vwList.add(v.getBody());
 		}
@@ -236,9 +262,26 @@ public class StudentController {
 	}
 
 	/*---Update a book by id---*/
-	@PutMapping("/student/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Student student) {
-		studentService.update(id, student);
+	@PutMapping("/updateStudent/{id}")
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody NewStudent newStudent) {
+		studentService.update(newStudent.getStudent().getStudent_id(),newStudent.getStudent());
+		parentService.update(newStudent.getParent().getParent_id(),newStudent.getParent());
+		rankService.update(newStudent.getRank().getRankId(),newStudent.getRank());
+
+		Long sp_id = spService.getRelationBySIdAndPid(newStudent.getStudent().getStudent_id(), newStudent.getParent().getParent_id());
+		Student_Parent sp=spService.get(sp_id);
+		sp.setParent(newStudent.getParent());
+		sp.setStudent(newStudent.getStudent());
+		sp.setSp_relation(newStudent.getRelation());
+		spService.update(sp_id,sp);
+
+		Long rs_id=rsService.getRelationBySidAndRid(newStudent.getStudent().getStudent_id(),newStudent.getRank().getRankId() );
+		Rank_Student rs = rsService.get(rs_id);
+		rs.setRank(newStudent.getRank());
+		rs.setStudent(newStudent.getStudent());
+		rsService.update(rs_id,rs);
+		
+		//studentService.update(id, student);
 		return ResponseEntity.ok().body("Student has been updated successfully.");
 	}
 

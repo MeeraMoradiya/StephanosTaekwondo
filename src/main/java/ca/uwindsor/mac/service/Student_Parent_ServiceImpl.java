@@ -64,4 +64,10 @@ public class Student_Parent_ServiceImpl implements Student_Parent_Service {
 		return sp_dao.getParentByStudent(s);
 	}
 
+	@Override
+	public long getRelationBySIdAndPid(long sid, long pid) {
+		// TODO Auto-generated method stu
+		return sp_dao.getRelationBySIdAndPid(sid,pid);
+	}
+
 }

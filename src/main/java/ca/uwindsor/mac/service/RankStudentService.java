@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface RankStudentService {
 	   void delete(long id);
        Rank getRankByStudent(Student s);
        Date getRankDateByStudentId(long sid); 
+       public ArrayList<Long> getStudentIdByRankId(Long rank);
+       Long getRelationBySidAndRid(Long sid,Long rid);
        
 }

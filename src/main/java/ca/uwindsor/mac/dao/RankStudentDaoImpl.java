@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
+import ca.uwindsor.mac.model.Student_Parent;
 
 @Repository
 public class RankStudentDaoImpl implements RankStudentDao{
@@ -58,12 +60,26 @@ public class RankStudentDaoImpl implements RankStudentDao{
 	      return list.get(0).getRank();
 	}
 
+	public ArrayList<Long> getStudentIdByRankId(Long rank) {
+		ArrayList<Long> lst=new ArrayList<Long>();
+		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from RANK_STUDENT WHERE RANK_RANK_ID="+rank).list();
+	     for(Rank_Student rs : list) {
+	    	 lst.add(rs.getStudent().getStudent_id());
+	     }
+	     return lst;
+	}
+	
 	@Override
 	public Date getRankDateByStudentId(long id) {
 		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from RANK_STUDENT WHERE STUDENT_STUDENT_ID="+id).list();
 	      return list.get(0).getRank_date();
 	}
-	
-	
 
-}
+	@Override
+	public Long getRelationBySidAndRid(Long sid, Long rid) {
+		List<Rank_Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT_RANK WHERE STUDENT_STUDENT_ID="+sid+" AND RANK_RANK_ID="+rid).list();
+	    //  return list.get(0).getRank();
+		return list.get(0).getRS_id();
+	}
+	
+	}

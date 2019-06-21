@@ -66,5 +66,12 @@ public class Student_Parent_DaoImpl implements Student_Parent_Dao{
 		return list.get(0).getParent();
 	}
 
+	@Override
+	public long getRelationBySIdAndPid(long sid, long pid) {
+		List<Student_Parent> list = sessionFactory.getCurrentSession().createQuery("from STUDENT_PARENT WHERE STUDENT_STUDENT_ID="+sid+" AND PARENT_PARENT_ID="+pid).list();
+	    //  return list.get(0).getRank();
+		return list.get(0).getSp_id();
+	}
+
 
 }

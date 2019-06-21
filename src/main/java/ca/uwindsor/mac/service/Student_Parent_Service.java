@@ -17,4 +17,5 @@ public interface Student_Parent_Service {
 	   List<Student_Parent> list();
 	   void update(long id, Student_Parent sp);
 	   void delete(long id);
+long getRelationBySIdAndPid(long sid, long pid);
 }

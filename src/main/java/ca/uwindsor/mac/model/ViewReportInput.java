@@ -10,7 +10,7 @@ public class ViewReportInput {
 	private Date reportFrom;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date reportTo;
-	private String belt;
+	private Long belt;
 	private String city;
 	private String classLevel;
 	private String status;
@@ -28,10 +28,11 @@ public class ViewReportInput {
 	public void setReportTo(Date reportTo) {
 		this.reportTo = reportTo;
 	}
-	public String getBelt() {
+	
+	public Long getBelt() {
 		return belt;
 	}
-	public void setBelt(String belt) {
+	public void setBelt(Long belt) {
 		this.belt = belt;
 	}
 	public String getCity() {

@@ -24,5 +24,7 @@ public interface Student_Parent_Dao {
 	
 	public Student getStudentByParent(Parent p);
 	public Parent getParentByStudent(Student s);
+	
+	public long getRelationBySIdAndPid(long sid, long pid);
 
 }
