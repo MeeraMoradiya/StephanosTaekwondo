@@ -100,6 +100,20 @@ public class StudentController {
 		rsService.save(rs);
 		return ResponseEntity.ok().body("New Student has been saved Successfully");
 	}
+	
+	@PostMapping("/saveAttendance")
+	public ResponseEntity<?> saveAttendance(@RequestBody ArrayList<Long> l) {
+		Attendance a;
+		for(Long at:l) {
+			a=new Attendance();
+			a.setA_dateTime(new Date());
+			a.setStudent(studentService.get(at));
+			//a.setCls(null);
+			atService.save(a);
+		}
+		
+		return ResponseEntity.ok().body("New Student has been saved Successfully");
+	}
 
 	@GetMapping("/getAllStudents")
 	public ResponseEntity<List<NewStudent>> listAll() {
@@ -284,6 +298,9 @@ public class StudentController {
 		//studentService.update(id, student);
 		return ResponseEntity.ok().body("Student has been updated successfully.");
 	}
+	
+	
+	
 
 	/*---Delete a book by id---*/
 	@DeleteMapping("/student/{id}")

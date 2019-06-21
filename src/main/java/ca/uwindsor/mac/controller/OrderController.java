@@ -26,7 +26,7 @@ import ca.uwindsor.mac.service.StudentService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/order")
 public class OrderController {
 	
 	@Autowired
