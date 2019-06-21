@@ -100,4 +100,10 @@ public class StudentDaoImpl implements StudentDao{
 		}
 		return lst;
 	}
+
+	@Override
+	public List<Student> getStudentByName(String name) {
+		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_FNAME LIKE '%"+name+"%' OR STUDENT_LNAME LIKE '%"+name+"%' OR STUDENT_NICKNAME LIKE '%"+name+"%'").list();
+		return list;
+	}
 }

@@ -17,5 +17,6 @@ public interface StudentService {
 	   public ArrayList<Long> getStudentListByDOJ(java.sql.Date fromDate,java.sql.Date toDate);
 	   public ArrayList<Long> getStudentListByCity(String city);
 	   public ArrayList<Long> getStudentListByStatus(String status);
+	   public List<Student> getStudentByName(String name);
 
 }

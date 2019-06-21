@@ -123,6 +123,20 @@ public class StudentController {
 		}
 		return ResponseEntity.ok().body(students);
 	}
+	
+	
+	@GetMapping("/searchByName/{name}")
+	public ResponseEntity<List<ViewStudentModel>> searchByName(@PathVariable("name") String sName) {
+		List<ViewStudentModel> lsView=new ArrayList<ViewStudentModel>();
+		ViewStudentModel vw=new ViewStudentModel();
+		List<Student> st =studentService.getStudentByName(sName);
+		for(Student s:st) {
+		ResponseEntity rs=get(s.getStudent_id());
+		lsView.add((ViewStudentModel)rs.getBody());
+		}
+	
+		return ResponseEntity.ok().body(lsView);
+	}
 
 	@GetMapping("/viewStudent/{id}")
 	public ResponseEntity<ViewStudentModel> get(@PathVariable("id") long id) {
@@ -201,6 +215,7 @@ public class StudentController {
 		return ResponseEntity.ok().body(vwList);
 	}
 
+	
 	
 
 	/*

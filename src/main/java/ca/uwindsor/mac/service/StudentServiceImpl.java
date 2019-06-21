@@ -64,6 +64,12 @@ public class StudentServiceImpl implements StudentService{
 	public ArrayList<Long> getStudentListByStatus(String status) {
 		return studentDao.getStudentListByStatus(status);
 	}
+
+	@Override
+	public List<Student> getStudentByName(String name) {
+		
+		return studentDao.getStudentByName(name);
+	}
 	
 
 
