@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ViewReportInput {
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
 	private Date reportFrom;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
 	private Date reportTo;
 	private String belt;
 	private String city;

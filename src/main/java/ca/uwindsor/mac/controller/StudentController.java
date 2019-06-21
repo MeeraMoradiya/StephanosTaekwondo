@@ -1,6 +1,7 @@
 package ca.uwindsor.mac.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,8 +26,11 @@ import com.mchange.v2.util.CollectionUtils;
 
 import ca.uwindsor.mac.model.Attendance;
 import ca.uwindsor.mac.model.Class;
+import ca.uwindsor.mac.model.Fees;
+import ca.uwindsor.mac.model.FeesWrapper;
 import ca.uwindsor.mac.model.Membership;
 import ca.uwindsor.mac.model.NewStudent;
+import ca.uwindsor.mac.model.Parent;
 import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
@@ -138,12 +142,30 @@ public class StudentController {
 	}
 	
 	@GetMapping("/testObject")
-	public ResponseEntity<ViewReportInput> testObject() {
-		ViewReportInput v= new ViewReportInput();
+	public ResponseEntity<FeesWrapper> testObject() {
+		FeesWrapper v= new FeesWrapper();
 		
 		
 		return ResponseEntity.ok().body(v);
 	}
+	
+	@PostMapping("/saveFees")
+	   public ResponseEntity<?> save(@RequestBody FeesWrapper fw) {
+		Fees fees=new Fees();
+		fees.setStudent(studentService.get(fw.getSid()));
+		fees.setMembership(memService.get(fw.getmId()));
+		fees.setF_date(new Date());
+		fees.setF_amount(fw.getCost());
+		
+	      long id = feesService.save(fees);
+	      return ResponseEntity.ok().body("Fees has been saved ");
+	   }
+	
+	 @GetMapping("/fees")
+	   public ResponseEntity<List<Fees>> listFees() {
+	      List<Fees> students = feesService.list();
+	      return ResponseEntity.ok().body(students);
+	   }
 	
 	
 	@PostMapping("/viewReport")

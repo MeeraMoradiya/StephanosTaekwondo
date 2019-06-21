@@ -40,7 +40,7 @@ public class FeesDaoImple implements FeesDao{
 		 Fees f2 = session.byId(Fees.class).load(id);
 		f2.setF_date(fees.getF_date());
 		f2.setF_amount(fees.getF_amount());
-		f2.setF_term(fees.getF_term());
+		
 		f2.setStudent(fees.getStudent());
 	     session.flush();
 		

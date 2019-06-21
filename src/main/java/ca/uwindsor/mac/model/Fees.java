@@ -16,9 +16,6 @@ public class Fees {
 	@Column(name="F_ID")
 	private long f_id;
 	
-	@Column(name="F_TERM")
-	private String f_term;
-	
 	@Column(name="F_AMOUNT")
 	private double f_amount;
 	
@@ -40,13 +37,7 @@ public class Fees {
 		this.f_id = f_id;
 	}
 
-	public String getF_term() {
-		return f_term;
-	}
-
-	public void setF_term(String f_term) {
-		this.f_term = f_term;
-	}
+	
 
 	public double getF_amount() {
 		return f_amount;
@@ -84,7 +75,7 @@ public class Fees {
 
 	@Override
 	public String toString() {
-		return "Fees [f_id=" + f_id + ", f_term=" + f_term + ", f_amount=" + f_amount + ", f_date=" + f_date
+		return "Fees [f_id=" + f_id +", f_amount=" + f_amount + ", f_date=" + f_date
 				+ ", student=" + student.toString() + ", membership=" + membership.toString() + "]";
 	}
 
