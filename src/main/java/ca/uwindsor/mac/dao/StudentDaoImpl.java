@@ -1,11 +1,17 @@
 package ca.uwindsor.mac.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 import ca.uwindsor.mac.model.Student;
 
 @Repository
@@ -56,4 +62,42 @@ public class StudentDaoImpl implements StudentDao{
 		      sessionFactory.getCurrentSession().delete(student);
 	   }
 
+	
+	public ArrayList<Long> getStudentListByDOJ(java.sql.Date fromDate,java.sql.Date toDate) {
+		ArrayList<Long> lst =new ArrayList<Long>(); 
+		 try {
+		   
+	     System.out.println("Start Date is: "+fromDate);  
+		
+		 
+	    
+	     System.out.println("End Date is: "+toDate);  
+		 
+		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_JOINDATE >= TO_DATE("+fromDate+", 'YYYY-MM-DD') AND STUDENT_JOINDATE <= "+toDate).list();
+		for(Student st : list) {
+			lst.add(st.getStudent_id());
+		}
+		 }catch(Exception e) {
+			 System.out.println("Exception Occured"+e);
+		 }
+		return lst;
+	}
+	
+	public ArrayList<Long> getStudentListByCity(String city){
+		ArrayList<Long> lst =new ArrayList<Long>(); 
+		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_CITY='"+city+"'").list();
+		for(Student st : list) {
+			lst.add(st.getStudent_id());
+		}
+		return lst;
+	}
+	
+	public ArrayList<Long> getStudentListByStatus(String status){
+		ArrayList<Long> lst =new ArrayList<Long>(); 
+		List<Student> list = sessionFactory.getCurrentSession().createQuery("from STUDENT WHERE STUDENT_STATUS='"+status+"'").list();
+		for(Student st : list) {
+			lst.add(st.getStudent_id());
+		}
+		return lst;
+	}
 }

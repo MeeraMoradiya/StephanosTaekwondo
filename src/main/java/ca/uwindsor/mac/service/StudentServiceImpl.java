@@ -1,5 +1,7 @@
 package ca.uwindsor.mac.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,21 @@ public class StudentServiceImpl implements StudentService{
 		studentDao.delete(id);
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public ArrayList<Long> getStudentListByDOJ(java.sql.Date fromDate, java.sql.Date toDate) {
+		return studentDao.getStudentListByDOJ(fromDate, toDate);
+	}
+
+	@Override
+	public ArrayList<Long> getStudentListByCity(String city) {
+		return studentDao.getStudentListByCity(city);
+	}
+
+	@Override
+	public ArrayList<Long> getStudentListByStatus(String status) {
+		return studentDao.getStudentListByStatus(status);
 	}
 	
 

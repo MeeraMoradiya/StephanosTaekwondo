@@ -2,6 +2,12 @@ package ca.uwindsor.mac.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mchange.v2.util.CollectionUtils;
+
 import ca.uwindsor.mac.model.Attendance;
 import ca.uwindsor.mac.model.Class;
 import ca.uwindsor.mac.model.Membership;
@@ -23,6 +31,7 @@ import ca.uwindsor.mac.model.Rank;
 import ca.uwindsor.mac.model.Rank_Student;
 import ca.uwindsor.mac.model.Student;
 import ca.uwindsor.mac.model.Student_Parent;
+import ca.uwindsor.mac.model.ViewReportInput;
 import ca.uwindsor.mac.model.ViewStudentModel;
 import ca.uwindsor.mac.service.AttandenceService;
 import ca.uwindsor.mac.service.ClassRegistrationService;
@@ -96,13 +105,17 @@ public class StudentController {
 		Rank r;
 
 		for (Student s : st) {
+			
+			if(s.getStudent_status().equalsIgnoreCase("ACTIVE")) {
 			n = new NewStudent();
 			r = rsService.getRankByStudent(s);
 			n.setStudent(s);
 			n.setParent(spService.getParentByStudent(s));
 			n.setRank(r);
 			n.setRelation("Parent");
+			
 			students.add(n);
+			}
 		}
 		return ResponseEntity.ok().body(students);
 	}
@@ -123,6 +136,50 @@ public class StudentController {
 		vw.setCls(clsService.getClassByStudentId(id));
 		return ResponseEntity.ok().body(vw);
 	}
+	
+	@GetMapping("/testObject")
+	public ResponseEntity<ViewReportInput> testObject() {
+		ViewReportInput v= new ViewReportInput();
+		
+		
+		return ResponseEntity.ok().body(v);
+	}
+	
+	
+	@PostMapping("/viewReport")
+	public ResponseEntity<List<ViewStudentModel>> viewReport(@RequestBody ViewReportInput input) {
+		List<ViewStudentModel> vwList=new ArrayList<ViewStudentModel>();
+		ArrayList<Long> listDOJ =new ArrayList<Long>();
+		ArrayList<Long> listStatus =new ArrayList<Long>();
+		ArrayList<Long> listCity =new ArrayList<Long>();
+		List<Long> listIds=new ArrayList<Long>();
+		
+		
+		if(input.getReportFrom() != null && input.getReportTo() !=null) {
+			 listDOJ = studentService.getStudentListByDOJ(input.getReportFrom(), input.getReportTo());
+		}
+		
+		if(input.getStatus() != null) {
+			listStatus=studentService.getStudentListByStatus(input.getStatus());
+		}
+		
+		if(input.getCity() != null) {
+			listCity=studentService.getStudentListByCity(input.getCity());
+		}
+		
+		listIds=listDOJ.stream()
+	    .filter(listStatus::contains)
+	    .collect(Collectors
+	    .toList());
+		for(long l:listIds) {
+			ResponseEntity<ViewStudentModel> v=	get(l);
+			vwList.add(v.getBody());
+		}
+		
+		return ResponseEntity.ok().body(vwList);
+	}
+
+	
 
 	/*
 	 * ---Get a student by id---
