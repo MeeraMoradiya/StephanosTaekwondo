@@ -15,7 +15,7 @@ public interface InventoryService {
 
 	void delete(long id);
 	
-	
+	Inventory getInventoryByName(String name);
 	
 	
 

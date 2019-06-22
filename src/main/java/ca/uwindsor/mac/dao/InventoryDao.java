@@ -18,6 +18,8 @@ public interface InventoryDao {
 
 	void delete(long id);
 	
+	Inventory getInventoryByName(String name);
+	
 	
 
 }

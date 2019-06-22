@@ -45,5 +45,10 @@ public class InventoryServiceImpl implements InventoryService{
 		
 	}
 
+	@Override
+	public Inventory getInventoryByName(String name) {
+		return invDao.getInventoryByName(name);
+	}
+
 	
 }

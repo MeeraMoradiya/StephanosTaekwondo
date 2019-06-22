@@ -204,6 +204,7 @@ public class StudentController {
 	public ResponseEntity<List<ViewStudentModel>> viewReport(@RequestBody ViewReportInput input) {
 		List<ViewStudentModel> vwList=new ArrayList<ViewStudentModel>();
 		ArrayList<Long> listDOJ =new ArrayList<Long>();
+		ArrayList<Long> listStatus =new ArrayList<Long>();
 		ArrayList<Long> listStatus1 =new ArrayList<Long>();
 		ArrayList<Long> listStatus2 =new ArrayList<Long>();
 		ArrayList<Long> listCity =new ArrayList<Long>();
@@ -226,10 +227,13 @@ public class StudentController {
 		     while (st.hasMoreTokens()) {  
 		         if(st.nextToken().equalsIgnoreCase("A")) {
 		        	 listStatus1=studentService.getStudentListByStatus("ACTIVE");
+		        	 
+		        	 listStatus.addAll(listStatus1);
 		         }
 		         
 		         if(st.nextToken().equalsIgnoreCase("I")) {
 		        	 listStatus2=studentService.getStudentListByStatus("INACTIVE");
+		        	 listStatus.addAll(listStatus2);
 		         }
 		         
 		     }  
@@ -251,8 +255,8 @@ public class StudentController {
 		}
 		 Set<Long> setIds=(Set<Long>)listIds.stream().collect(Collectors.toSet());
 		 Set<Long> setDOJ=(Set<Long>)listDOJ.stream().collect(Collectors.toSet());
-		 Set<Long> setStatus=(Set<Long>)listStatus1.stream().collect(Collectors.toSet());
-		 Set<Long> setStatus2=(Set<Long>)listStatus2.stream().collect(Collectors.toSet());
+		 Set<Long> setStatus=(Set<Long>)listStatus.stream().collect(Collectors.toSet());
+		
 		 Set<Long> setCity=(Set<Long>)listCity.stream().collect(Collectors.toSet());
 		 Set<Long> setBelt=(Set<Long>)listRank.stream().collect(Collectors.toSet());
 		 Set<Long> setClass=(Set<Long>)listClass.stream().collect(Collectors.toSet());

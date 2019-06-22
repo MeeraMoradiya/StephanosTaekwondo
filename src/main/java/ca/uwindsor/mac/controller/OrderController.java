@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.uwindsor.mac.model.Fees;
 import ca.uwindsor.mac.model.Inventory;
 import ca.uwindsor.mac.model.Order;
+import ca.uwindsor.mac.model.OrderWrapper;
 import ca.uwindsor.mac.service.FeesService;
 import ca.uwindsor.mac.service.InventoryService;
 import ca.uwindsor.mac.service.OrderService;
@@ -46,17 +47,20 @@ public class OrderController {
 	
 	
 	 @PostMapping("/saveOrder")
-	   public ResponseEntity<?> save(@RequestBody Order order) {
+	   public ResponseEntity<?> save(@RequestBody OrderWrapper order) {
 	      
-		 	Inventory item=invService.get(order.getInv().getInventory_Id());
-		 	
-		 	order.setStudent(studentService.get(order.getStudent().getStudent_id()));
-		 	order.setInv(invService.get(order.getInv().getInventory_Id()));
+		    Inventory item=invService.getInventoryByName(order.getName());
+		    item.setStock(item.getStock() - order.getQty() );	
+		 	Order o=new Order();
+		 	o.setStudent(studentService.get(order.getSid()));
+		 	o.setQty(order.getQty());
+		 	o.setInv(item);;
+		 	//o.setInv(invService.get(order.getInv().getInventory_Id()));
 	
-		 	item.setStock( invService.get(order.getInv().getInventory_Id()).getStock() - order.getQty());	 	
-		 	invService.update(invService.get(order.getInv().getInventory_Id()).getInventory_Id(), item);   
+		 	 	
+		 	invService.update(item.getInventory_Id(), item);   
 	      
-		 	long id = orderService.save(order);
+		 	long id = orderService.save(o);
 	      
 		 	return ResponseEntity.ok().body("New Order has been saved with ID:" + id);	      
 	   }
