@@ -25,8 +25,7 @@ public class Membership {
 	@Column(name="COST")
 	private double m_cost;
 	
-	@OneToOne
-	private Student student;
+	
 
 	public long getMembership_id() {
 		return membership_id;
@@ -54,19 +53,12 @@ public class Membership {
 		this.m_cost = m_cost;
 	}
 
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-
 	@Override
 	public String toString() {
-		return "Membership [membership_id=" + membership_id + ", m_duration=" + m_duration + ", m_cost=" + m_cost
-				+ ", student=" + student + "]";
+		return "Membership [membership_id=" + membership_id + ", m_duration=" + m_duration + ", m_cost=" + m_cost + "]";
 	}
+
+	
 
 	
 	

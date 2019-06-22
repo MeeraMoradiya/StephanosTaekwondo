@@ -42,7 +42,7 @@ public class MembershipDaoImpl implements MembershipDao{
 		 Membership mem2 = session.byId(Membership.class).load(id);
 		mem2.setM_duration(mem.getM_duration());
 		 mem2.setM_cost(mem.getM_cost());
-		 mem2.setStudent(mem.getStudent());
+		
 	    
 	     session.flush();
 	}
