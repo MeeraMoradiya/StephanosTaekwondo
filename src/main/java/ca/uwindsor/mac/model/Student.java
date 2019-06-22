@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name = "STUDENT")
 public class Student {
 
@@ -24,10 +26,12 @@ public class Student {
 	
 	@Column(name="STUDENT_NICKNAME")
 	private String student_nickname;
-		
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name="STUDENT_DOB")
 	private Date student_dob;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name="STUDENT_JOINDATE")
 	private Date student_joinDate;
 	
