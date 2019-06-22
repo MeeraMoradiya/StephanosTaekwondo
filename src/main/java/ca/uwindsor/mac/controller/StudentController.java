@@ -210,6 +210,9 @@ public class StudentController {
 		ArrayList<Long> listCity =new ArrayList<Long>();
 		ArrayList<Long> listRank=new ArrayList<Long>();
 		ArrayList<Long> listClass=new ArrayList<Long>();
+		ArrayList<Long> listClass1=new ArrayList<Long>();
+		ArrayList<Long> listClass2=new ArrayList<Long>();
+		ArrayList<Long> listClass3=new ArrayList<Long>();
 		
 		List<Long> listIds=new ArrayList<Long>();
 		List<Student> lstStd=studentService.list();
@@ -250,8 +253,27 @@ public class StudentController {
 		}
 		
 		if(input.getClassLevel() != null && !input.getClassLevel().isEmpty()) {
+			 StringTokenizer st = new StringTokenizer(input.getClassLevel(),",");  
+		     while (st.hasMoreTokens()) {  
+		         if(st.nextToken().equalsIgnoreCase("B")) {
+		        	 listClass1=clsService.getStudentByClassId(1);
+		        	 
+		        	 listClass.addAll(listStatus1);
+		         }
+		         
+		         if(st.nextToken().equalsIgnoreCase("I")) {
+		        	 listClass2=clsService.getStudentByClassId(2);
+		        	 listClass.addAll(listClass2);
+		         }
+		         
+		         
+		         if(st.nextToken().equalsIgnoreCase("E")) {
+		        	 listClass3=clsService.getStudentByClassId(3);
+		        	 listClass.addAll(listClass3);
+		         }
+		         
+		     }  
 			
-			listClass=clsService.getStudentByClassId(1);
 		}
 		 Set<Long> setIds=(Set<Long>)listIds.stream().collect(Collectors.toSet());
 		 Set<Long> setDOJ=(Set<Long>)listDOJ.stream().collect(Collectors.toSet());
