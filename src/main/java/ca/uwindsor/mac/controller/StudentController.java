@@ -30,6 +30,7 @@ import ca.uwindsor.mac.model.Class;
 import ca.uwindsor.mac.model.Fees;
 import ca.uwindsor.mac.model.FeesWrapper;
 import ca.uwindsor.mac.model.Membership;
+import ca.uwindsor.mac.model.NStudent;
 import ca.uwindsor.mac.model.NewStudent;
 import ca.uwindsor.mac.model.Parent;
 import ca.uwindsor.mac.model.Rank;
@@ -88,19 +89,40 @@ public class StudentController {
 	@PostMapping("/saveNewStudent")
 	public ResponseEntity<?> save(@RequestBody NewStudent newStudent) {
 
-		studentService.save(newStudent.getStudent());
-		parentService.save(newStudent.getParent());
-		rankService.save(newStudent.getRank());
-
-		Student_Parent sp = new Student_Parent();
-		sp.setParent(newStudent.getParent());
-		sp.setStudent(newStudent.getStudent());
-		sp.setSp_relation(newStudent.getRelation());
+		Student s=new Student();
+		s.setStudent_fname(newStudent.getStudent_fname());
+		s.setStudent_lname(newStudent.getStudent_lname());
+		s.setStudent_nickname(newStudent.getStudent_nickname());
+		s.setStudent_address(newStudent.getStudent_address());
+		s.setStudent_city(newStudent.getStudent_city());
+		s.setStudent_dob(newStudent.getDob());
+		s.setStudent_email(newStudent.getStudent_email());
+		s.setStudent_phone(newStudent.getStudent_phone());
+		s.setStudent_postal_code(newStudent.getStudent_postal_code());
+		s.setStudent_state(newStudent.getStudent_state());
+		
+		studentService.save(s);
+		
+		Parent p=new Parent();
+		p.setParent_name(newStudent.getParent_name());
+		p.setParent_phone(newStudent.getParent_phone());
+		p.setParent_email(newStudent.getParent_email());
+		
+		parentService.save(p);
+		
+		Student_Parent sp=new Student_Parent();
+		sp.setSp_relation(newStudent.getParent_relation());
+		sp.setParent(p);
+		sp.setStudent(s);
 		spService.save(sp);
+		
+	
+		
 
 		Rank_Student rs = new Rank_Student();
-		rs.setRank(newStudent.getRank());
-		rs.setStudent(newStudent.getStudent());
+		Rank r=rsService.getRankByStudent(s);
+		rs.setRank(r);
+		rs.setStudent(s);
 		rsService.save(rs);
 		return ResponseEntity.ok().body("New Student has been saved Successfully");
 	}
@@ -120,16 +142,16 @@ public class StudentController {
 	}
 
 	@GetMapping("/getAllStudents")
-	public ResponseEntity<List<NewStudent>> listAll() {
-		List<NewStudent> students = new ArrayList<NewStudent>();
+	public ResponseEntity<List<NStudent>> listAll() {
+		List<NStudent> students = new ArrayList<NStudent>();
 		List<Student> st = studentService.list();
-		NewStudent n;
+		NStudent n;
 		Rank r;
 
 		for (Student s : st) {
 			
 			if(s.getStudent_status().equalsIgnoreCase("ACTIVE")) {
-			n = new NewStudent();
+			n = new NStudent();
 			r = rsService.getRankByStudent(s);
 			n.setStudent(s);
 			n.setParent(spService.getParentByStudent(s));
@@ -332,7 +354,10 @@ public class StudentController {
 
 	/*---Update a book by id---*/
 	@PutMapping("/updateStudent/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody NewStudent newStudent) {
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody NStudent newStudent) {
+		
+		
+		
 		studentService.update(newStudent.getStudent().getStudent_id(),newStudent.getStudent());
 		parentService.update(newStudent.getParent().getParent_id(),newStudent.getParent());
 		rankService.update(newStudent.getRank().getRankId(),newStudent.getRank());
