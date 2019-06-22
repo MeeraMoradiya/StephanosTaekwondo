@@ -56,7 +56,7 @@ public class InventoryDaoImpl implements InventoryDao{
 
 	@Override
 	public Inventory getInventoryByName(String name) {
-		List<Inventory> list = sessionFactory.getCurrentSession().createQuery("from INVENTORY WHERE INVENTORY_NAME="+name).list();
+		List<Inventory> list = sessionFactory.getCurrentSession().createQuery("from INVENTORY WHERE INVENTORY_NAME='"+name+"'").list();
 		return list.get(0);
 	}
 

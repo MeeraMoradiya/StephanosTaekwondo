@@ -249,20 +249,19 @@ public class StudentController {
 		}
 		
 		if(input.getStatus() != null && !input.getStatus() .isEmpty()) {
-			 StringTokenizer st = new StringTokenizer(input.getStatus(),",");  
-		     while (st.hasMoreTokens()) {  
-		         if(st.nextToken().equalsIgnoreCase("A")) {
+			
+		         if(input.getStatus().equalsIgnoreCase("A")) {
 		        	 listStatus1=studentService.getStudentListByStatus("ACTIVE");
 		        	 
 		        	 listStatus.addAll(listStatus1);
 		         }
 		         
-		         if(st.nextToken().equalsIgnoreCase("I")) {
+		         if(input.getStatus().equalsIgnoreCase("I")) {
 		        	 listStatus2=studentService.getStudentListByStatus("INACTIVE");
 		        	 listStatus.addAll(listStatus2);
 		         }
 		         
-		     }  
+		     
 			
 			
 		}
@@ -276,26 +275,25 @@ public class StudentController {
 		}
 		
 		if(input.getClassLevel() != null && !input.getClassLevel().isEmpty()) {
-			 StringTokenizer st = new StringTokenizer(input.getClassLevel(),",");  
-		     while (st.hasMoreTokens()) {  
-		         if(st.nextToken().equalsIgnoreCase("B")) {
+			 
+		         if(input.getClassLevel().equalsIgnoreCase("B")) {
 		        	 listClass1=clsService.getStudentByClassId(1);
 		        	 
 		        	 listClass.addAll(listStatus1);
 		         }
 		         
-		         if(st.nextToken().equalsIgnoreCase("I")) {
+		         if(input.getClassLevel().equalsIgnoreCase("I")) {
 		        	 listClass2=clsService.getStudentByClassId(2);
 		        	 listClass.addAll(listClass2);
 		         }
 		         
 		         
-		         if(st.nextToken().equalsIgnoreCase("E")) {
+		         if(input.getClassLevel().equalsIgnoreCase("E")) {
 		        	 listClass3=clsService.getStudentByClassId(3);
 		        	 listClass.addAll(listClass3);
 		         }
 		         
-		     }  
+		     
 			
 		}
 		 Set<Long> setIds=(Set<Long>)listIds.stream().collect(Collectors.toSet());
