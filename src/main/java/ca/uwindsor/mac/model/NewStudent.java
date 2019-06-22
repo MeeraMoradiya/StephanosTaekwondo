@@ -2,10 +2,13 @@ package ca.uwindsor.mac.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class NewStudent {
 	private String student_fname;
 	private String student_lname;
 	private String student_city;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dob;
 	private String student_email;
 	private String student_level;

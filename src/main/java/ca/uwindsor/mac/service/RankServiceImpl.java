@@ -46,7 +46,7 @@ public class RankServiceImpl implements RankService{
 
 	@Override
 	public Rank getRankByBelt(String rank) {
-		rankDao.getRankByBelt(rank);
+		return rankDao.getRankByBelt(rank);
 	}
 	
 	
