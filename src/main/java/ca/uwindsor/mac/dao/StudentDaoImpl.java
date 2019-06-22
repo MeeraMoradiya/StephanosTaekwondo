@@ -16,7 +16,7 @@ import ca.uwindsor.mac.model.Student;
 
 @Repository
 public class StudentDaoImpl implements StudentDao{
-	
+	//Student
 	 @Autowired
 	   private SessionFactory sessionFactory;
 	
