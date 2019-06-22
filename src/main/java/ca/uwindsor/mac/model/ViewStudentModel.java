@@ -17,7 +17,7 @@ public class ViewStudentModel {
 	
 	
 	
-	Student getStudent() {
+	public Student getStudent() {
 		return student;
 	}
 	public void setStudent(Student student) {

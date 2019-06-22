@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,12 @@ public class ClassRegistrationServiceImpl implements ClassRegistrationService {
 	@Override
 	public ca.uwindsor.mac.model.Class getClassByStudentId(long sid) {
 		return clsDao.getClassByStudentId(sid);
+	}
+
+	@Override
+	public ArrayList<Long> getStudentByClassId(int cid) {
+		// TODO Auto-generated method stub
+		return clsDao.getStudentByClassId(cid);
 	}
 
 }

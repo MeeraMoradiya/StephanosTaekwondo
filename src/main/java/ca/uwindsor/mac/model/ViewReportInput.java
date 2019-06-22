@@ -16,6 +16,7 @@ public class ViewReportInput {
 	private String status;
 	
 	
+	
 	public Date getReportFrom() {
 		return reportFrom;
 	}

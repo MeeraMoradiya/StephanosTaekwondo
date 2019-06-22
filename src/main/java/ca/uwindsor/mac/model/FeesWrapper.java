@@ -1,9 +1,9 @@
 package ca.uwindsor.mac.model;
 
 public class FeesWrapper {
-	
-	private long mId;
 	private double cost;
+	private long mId;
+	
 	private long sid;
 	public long getmId() {
 		return mId;

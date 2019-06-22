@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -56,6 +57,16 @@ public class Class_Registration_DaoImpl implements ClassRegistrationDao{
 		List<ca.uwindsor.mac.model.Class_Registration> list = sessionFactory.getCurrentSession().createQuery("from CLASS_REGISTRATION WHERE STUDENT_STUDENT_ID="+sid).list();
 	    //  return list.get(0).getRank();
 		return list.get(0).getCls();
+	}
+
+	@Override
+	public ArrayList<Long> getStudentByClassId(int cid) {
+		ArrayList<Long> lst=new ArrayList<Long>();
+		List<ca.uwindsor.mac.model.Class_Registration> list = sessionFactory.getCurrentSession().createQuery("from CLASS_REGISTRATION WHERE CLS_CLASS_ID="+cid).list();
+	   for(Class_Registration c: list) {
+		   lst.add(c.getStudent().getStudent_id());
+	   }
+	   return lst;
 	}
 
 }

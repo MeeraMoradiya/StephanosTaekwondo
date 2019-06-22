@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -77,6 +78,9 @@ public class StudentController {
 	
 	@Autowired
 	private ClassRegistrationService clsService;
+	
+	@Autowired
+	private ClassService cService;
 	
 	
 
@@ -200,9 +204,12 @@ public class StudentController {
 	public ResponseEntity<List<ViewStudentModel>> viewReport(@RequestBody ViewReportInput input) {
 		List<ViewStudentModel> vwList=new ArrayList<ViewStudentModel>();
 		ArrayList<Long> listDOJ =new ArrayList<Long>();
-		ArrayList<Long> listStatus =new ArrayList<Long>();
+		ArrayList<Long> listStatus1 =new ArrayList<Long>();
+		ArrayList<Long> listStatus2 =new ArrayList<Long>();
 		ArrayList<Long> listCity =new ArrayList<Long>();
 		ArrayList<Long> listRank=new ArrayList<Long>();
+		ArrayList<Long> listClass=new ArrayList<Long>();
+		
 		List<Long> listIds=new ArrayList<Long>();
 		List<Student> lstStd=studentService.list();
 		for(Student s: lstStd) {
@@ -214,11 +221,23 @@ public class StudentController {
 			 listDOJ = studentService.getStudentListByDOJ(input.getReportFrom(), input.getReportTo());
 		}
 		
-		if(input.getStatus() != null) {
-			listStatus=studentService.getStudentListByStatus(input.getStatus());
+		if(input.getStatus() != null && !input.getStatus() .isEmpty()) {
+			 StringTokenizer st = new StringTokenizer(input.getStatus(),",");  
+		     while (st.hasMoreTokens()) {  
+		         if(st.nextToken().equalsIgnoreCase("A")) {
+		        	 listStatus1=studentService.getStudentListByStatus("ACTIVE");
+		         }
+		         
+		         if(st.nextToken().equalsIgnoreCase("I")) {
+		        	 listStatus2=studentService.getStudentListByStatus("INACTIVE");
+		         }
+		         
+		     }  
+			
+			
 		}
 		
-		if(input.getCity() != null) {
+		if(input.getCity() != null && !input.getCity().isEmpty()) {
 			listCity=studentService.getStudentListByCity(input.getCity());
 		}
 		
@@ -226,11 +245,17 @@ public class StudentController {
 			listRank=rsService.getStudentIdByRankId(input.getBelt());
 		}
 		
+		if(input.getClassLevel() != null && !input.getClassLevel().isEmpty()) {
+			
+			listClass=clsService.getStudentByClassId(1);
+		}
 		 Set<Long> setIds=(Set<Long>)listIds.stream().collect(Collectors.toSet());
 		 Set<Long> setDOJ=(Set<Long>)listDOJ.stream().collect(Collectors.toSet());
-		 Set<Long> setStatus=(Set<Long>)listStatus.stream().collect(Collectors.toSet());
+		 Set<Long> setStatus=(Set<Long>)listStatus1.stream().collect(Collectors.toSet());
+		 Set<Long> setStatus2=(Set<Long>)listStatus2.stream().collect(Collectors.toSet());
 		 Set<Long> setCity=(Set<Long>)listCity.stream().collect(Collectors.toSet());
 		 Set<Long> setBelt=(Set<Long>)listRank.stream().collect(Collectors.toSet());
+		 Set<Long> setClass=(Set<Long>)listClass.stream().collect(Collectors.toSet());
 		 if(!setDOJ.isEmpty()) {
 			 setIds.retainAll(setDOJ);
 		 }
@@ -244,6 +269,10 @@ public class StudentController {
 		 
 		 if(!setBelt.isEmpty()) {
 			 setIds.retainAll(setBelt);
+		 }
+		 
+		 if(!setClass.isEmpty()) {
+			 setIds.retainAll(setClass);
 		 }
 		
 		 

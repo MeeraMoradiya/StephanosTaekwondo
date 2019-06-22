@@ -1,5 +1,6 @@
 package ca.uwindsor.mac.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.uwindsor.mac.model.Class_Registration;;
@@ -16,4 +17,6 @@ public interface ClassRegistrationDao {
 	void delete(long id);
 	
 	ca.uwindsor.mac.model.Class getClassByStudentId(long sid);
+	
+	ArrayList<Long> getStudentByClassId(int cid);
 }

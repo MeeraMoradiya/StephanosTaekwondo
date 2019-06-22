@@ -14,5 +14,9 @@ public interface InventoryService {
 	void update(long id, Inventory inv);
 
 	void delete(long id);
+	
+	
+	
+	
 
 }

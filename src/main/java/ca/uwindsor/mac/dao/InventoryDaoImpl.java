@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.uwindsor.mac.model.Inventory;
 import ca.uwindsor.mac.model.Parent;
+import ca.uwindsor.mac.model.Student;
 
 @Repository
 public class InventoryDaoImpl implements InventoryDao{
@@ -52,5 +53,7 @@ public class InventoryDaoImpl implements InventoryDao{
 	      sessionFactory.getCurrentSession().delete(inv);
 		
 	}
+
+	
 
 }
