@@ -15,5 +15,5 @@ public interface MembershipDao {
 
 	void delete(long id);
 	
-	Membership getMembershipByStudent(long sid);
+	
 }

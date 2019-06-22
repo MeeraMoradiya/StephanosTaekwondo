@@ -15,5 +15,5 @@ public interface MembershipService {
 
 	void delete(long id);
 	
-    Membership getMembershipByStudentId(long sid);
+  
 }

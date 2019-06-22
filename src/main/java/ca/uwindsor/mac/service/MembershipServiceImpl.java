@@ -41,9 +41,6 @@ public class MembershipServiceImpl implements MembershipService{
 		
 	}
 
-	@Override
-	public Membership getMembershipByStudentId(long sid) {
-		return memDao.getMembershipByStudent(sid);
-	}
+	
 
 }

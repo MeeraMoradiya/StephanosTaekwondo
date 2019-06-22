@@ -187,7 +187,7 @@ public class StudentController {
 		
 		vw.setParent(spService.getParentByStudent(student));
 		vw.setStudent(student);
-		vw.setMem(memService.getMembershipByStudentId(id));
+		//vw.setMem(memService.getMembershipByStudentId(id));
 		vw.setRank(r);
 		vw.setFees(feesService.getFeesByStudentId(id));
 		vw.setAttend(atService.getAttendanceByStudent(id));
