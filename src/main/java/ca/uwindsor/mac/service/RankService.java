@@ -11,6 +11,7 @@ public interface RankService {
 	   List<Rank> list();
 	   void update(long id, Rank rank);
 	   void delete(long id);
+	   Rank getRankByBelt(String rank);
 	
 
 }

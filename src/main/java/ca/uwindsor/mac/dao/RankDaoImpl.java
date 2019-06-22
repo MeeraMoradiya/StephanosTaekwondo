@@ -48,4 +48,10 @@ public class RankDaoImpl implements RankDao {
 		
 	}
 
+	@Override
+	public Rank getRankByBelt(String rank) {
+		List<Rank> list = sessionFactory.getCurrentSession().createQuery("from RANK WHERE RANK_BELTCOLOUR='"+rank+"'").list();
+	      return list.get(0);
+	}
+
 }

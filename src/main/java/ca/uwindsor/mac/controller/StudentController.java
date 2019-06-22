@@ -100,6 +100,7 @@ public class StudentController {
 		s.setStudent_phone(newStudent.getStudent_phone());
 		s.setStudent_postal_code(newStudent.getStudent_postal_code());
 		s.setStudent_state(newStudent.getStudent_state());
+		s.setStudent_status("ACTIVE");
 		
 		studentService.save(s);
 		
@@ -120,7 +121,7 @@ public class StudentController {
 		
 
 		Rank_Student rs = new Rank_Student();
-		Rank r=rsService.getRankByStudent(s);
+		Rank r=rankService.getRankByBelt(newStudent.getStudent_rank());
 		rs.setRank(r);
 		rs.setStudent(s);
 		rsService.save(rs);

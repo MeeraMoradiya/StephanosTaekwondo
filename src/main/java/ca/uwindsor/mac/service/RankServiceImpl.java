@@ -43,6 +43,11 @@ public class RankServiceImpl implements RankService{
 		rankDao.delete(id);
 		
 	}
+
+	@Override
+	public Rank getRankByBelt(String rank) {
+		rankDao.getRankByBelt(rank);
+	}
 	
 	
 
