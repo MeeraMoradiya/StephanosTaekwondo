@@ -105,7 +105,7 @@
 				<version>2.2</version>
 				<configuration>
 					<path>/</path>
-					<port>8989</port>
+					<port>8882</port>
 				</configuration>
 			</plugin>
 		</plugins>
