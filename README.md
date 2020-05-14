@@ -1,4 +1,35 @@
 # StephanosTaekwondo
+
+Project Description:
+
+There is only one instructor who teaches all classes and he is the only user.
+
+Student data are stored in the database. This includes: their name, date of birth, the date they joined the school, their mobile number, email, and address.
+
+The school wants to track also the students’ parents (Mother and Father). Most students live with their parents but NOT all students have parents (some students might be adults so there is no need to keep track of their parents). We also stored parents’ mobile phone and email address. Parents may also be students.
+
+Students are not be deleted from the system but they are either Active or Inactive (for those who drop out).
+
+The instructor can keep track of his inventory, such as, belts, uniforms, weapons, etc. These includes the product name, product description, cost price and selling price.
+
+Students pay fees for membership, tests, purchasing products, etc. The system is able to keep track of all money received from students. The system show this information for any given date, e.g. by month or within a range such as, January 1-June 30th 2019.
+
+A class is offered at specific times and days of the week. For example, one class might be on Mondays and Thursdays from 5:00-6:00 pm is an intermediate-level class. Another class might be on Mondays, Wednesdays and Fridays from 6:00-7:00 pm is a beginner-level class, etc.
+
+Students may attend any class at any level during each week so there is no expectation that any particular student will attend any particular class session. Therefore, the actual attendance of students at each individual class meeting is tracked.
+
+Each student holds a rank in the martial arts. The belt color and the date the student awarded each rank is kept in the database. A given rank may be held by many students. While it is customary to think of a student as having a single rank, it can track each student’s progress through the ranks. Therefore, every rank that a student attains is kept in the system. New students joining the school are automatically given a white belt rank (default).
+
+Sample ranks (the user can enter any ranks in the Ranks table) are:
+
+White
+Yellow
+Green
+Blue
+Red
+Black
+
+
 The project is implemented using Spring, Rest API and Oracle through which the instructur(user) can keep track track of his/her hundreds of students.
 
 Steps to run the system:
